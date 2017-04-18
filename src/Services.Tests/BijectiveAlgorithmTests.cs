@@ -1,3 +1,4 @@
+using UrlMinifier.Services.Algorithms;
 using Xunit;
 
 namespace UrlMinifier.Services.Tests

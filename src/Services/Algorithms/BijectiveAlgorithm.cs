@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 
-namespace UrlMinifier.Services
+namespace UrlMinifier.Services.Algorithms
 {
     public class BijectiveAlgorithm
     {
-        public static readonly string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        public static readonly int Base = Alphabet.Length;
+        private const string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private static readonly int Base = Alphabet.Length;
 
         public string Encode(int value)
         {
