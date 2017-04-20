@@ -1,0 +1,46 @@
+﻿html, body {
+    height: 100%;
+}
+
+.content {
+    height: 100%;
+    min-height: 100%;
+    display: block;
+}
+
+.fill {
+    height: 90%;
+}
+
+.vertical-align {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+    display: flex;
+    align-items: center;
+}
+
+.table-fixed {
+    width: 100%;
+}
+.table-fixed tbody {
+    height: 400px;
+    overflow-y: auto;
+    width: 100%;
+}
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+}
+.table-fixed tbody td {
+    float: left;
+}
+.table-fixed thead tr th {
+    float: left;
+}
