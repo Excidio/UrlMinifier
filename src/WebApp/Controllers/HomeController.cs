@@ -6,8 +6,6 @@ namespace UrlMinifier.WebApp.Controllers
     {
         public IActionResult Index() => View();
 
-        public IActionResult AppComponent() => PartialView();
-
         public IActionResult Error() => View();
     }
 }

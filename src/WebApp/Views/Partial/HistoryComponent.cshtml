@@ -10,11 +10,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of items">
-                    <td class="col-xs-4">{{item.originalUrl}}</td>
-                    <td class="col-xs-3">{{item.shortUrl}}</td>
-                    <td class="col-xs-2">{{item.clickCount}}</td>
-                    <td class="col-xs-3">{{item.dateCreated}}</td>
+                <tr *ngFor="let urlRecord of urlRecords">
+                    <td class="col-xs-4">{{urlRecord.originalUrl}}</td>
+                    <td class="col-xs-3">{{urlRecord.shortUrl}}</td>
+                    <td class="col-xs-2">{{urlRecord.clickCount}}</td>
+                    <td class="col-xs-3">{{urlRecord.dateCreated}}</td>
                 </tr>
             </tbody>
         </table>

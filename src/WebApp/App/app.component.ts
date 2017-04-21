@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'urlminifier-app',
-    templateUrl: '/home/appComponent'
+    templateUrl: '/partial/appComponent'
 })
 export class AppComponent {
     public constructor(private titleService: Title) { }

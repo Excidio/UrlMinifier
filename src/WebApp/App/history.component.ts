@@ -1,31 +1,19 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { DataService } from './history.service';
+import { UrlRecord } from './url-record';
 
 @Component({
-    templateUrl: '/url/HistoryComponent'
+    templateUrl: '/partial/HistoryComponent',
+    providers: [DataService]
 })
 
 export class HistoryComponent {
-    items : Item[] = [
-        new Item("https://www.yandex.ru/", "http://ttt.com", 1, "01.01.0001"),
-        new Item("https://www.google.ru/", "http://ttt.com", 2, "00.00.2000"),
-        new Item("https://translate.google.ru/", "http://ttt.com", 0, "20.04.2017")
-    ];
-}
+    urlRecords: UrlRecord[];
+    constructor(private dataService: DataService) { }
 
-class Item {
-    constructor(
-        originalUrl: string,
-        shortUrl: string,
-        clickCount: number,
-        dateCreated: string) {
-        this.originalUrl = originalUrl;
-        this.shortUrl = shortUrl;
-        this.clickCount = clickCount;
-        this.dateCreated = dateCreated;
+    ngOnInit() {
+        this.dataService.getData()
+            .subscribe((data: Response) => this.urlRecords = data.json());
     }
-
-    originalUrl: string;
-    shortUrl: string;
-    clickCount: number;
-    dateCreated: string;
 }

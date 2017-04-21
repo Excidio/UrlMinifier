@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Content Include="wwwroot\systemjs.config.js" />
+    <Content Include="wwwroot\user.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />

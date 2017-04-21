@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 
 @Component({
-    templateUrl: '/url/IndexComponent'
+    templateUrl: '/partial/IndexComponent'
 })
 
 export class IndexComponent {

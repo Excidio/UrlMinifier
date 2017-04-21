@@ -23,7 +23,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'urlminifier-app',
-        templateUrl: '/home/appComponent'
+        templateUrl: '/partial/appComponent'
     }),
     __metadata("design:paramtypes", [platform_browser_1.Title])
 ], AppComponent);
