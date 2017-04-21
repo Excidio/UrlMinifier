@@ -10,28 +10,27 @@ namespace UrlMinifier.Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Urls",
+                name: "MinifiedUrls",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClickCount = table.Column<int>(nullable: false),
-                    CreatorIpAddress = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false),
-                    DateLastUpdated = table.Column<DateTime>(nullable: false),
-                    OriginalUrl = table.Column<string>(nullable: true),
+                    DateLastUpdated = table.Column<DateTime>(nullable: true),
+                    OriginalUrl = table.Column<string>(nullable: false),
                     ShortUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Urls", x => x.Id);
+                    table.PrimaryKey("PK_MinifiedUrls", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Urls");
+                name: "MinifiedUrls");
         }
     }
 }

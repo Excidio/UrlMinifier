@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UrlMinifier.Domain
 {
-    public class Url
+    public class MinifiedUrl
     {
         public int Id { get; set; }
 
+        [Required]
         public string OriginalUrl { get; set; }
 
         public string ShortUrl { get; set; }
@@ -14,8 +16,6 @@ namespace UrlMinifier.Domain
 
         public DateTime DateCreated { get; set; }
 
-        public string CreatorIpAddress { get; set; }
-
-        public DateTime DateLastUpdated { get; set; }
+        public DateTime? DateLastUpdated { get; set; }
     }
 }

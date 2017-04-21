@@ -9,11 +9,11 @@ namespace UrlMinifier.Repository
         {
         }
 
-        public DbSet<Url> Urls { get; set; }
+        public DbSet<MinifiedUrl> MinifiedUrls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Url>().ToTable("Urls");
+            modelBuilder.Entity<MinifiedUrl>().ToTable("MinifiedUrls");
         }
     }
 }

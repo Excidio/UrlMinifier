@@ -14,28 +14,28 @@ namespace UrlMinifier.Repository.Implementation
             _context = bookContext;
         }
 
-        public int Add(Url url)
+        public int Add(MinifiedUrl url)
         {
-            _context.Urls.Add(url);
+            _context.MinifiedUrls.Add(url);
             _context.SaveChanges();
 
             return url.Id;
         }
 
-        public void Update(Url url)
+        public void Update(MinifiedUrl url)
         {
-            _context.Urls.Update(url);
+            _context.MinifiedUrls.Update(url);
             _context.SaveChanges();
         }
 
-        public Url Get(int id)
+        public MinifiedUrl Get(int id)
         {
-            return _context.Urls.SingleOrDefault(s => s.Id == id);
+            return _context.MinifiedUrls.SingleOrDefault(s => s.Id == id);
         }
 
-        public IEnumerable<Url> GetAll()
+        public IEnumerable<MinifiedUrl> GetAll()
         {
-            return _context.Urls.ToList();
+            return _context.MinifiedUrls.ToList();
         }
     }
 }

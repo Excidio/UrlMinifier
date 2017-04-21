@@ -14,7 +14,6 @@ var AppComponent = (function () {
     function AppComponent(titleService) {
         this.titleService = titleService;
     }
-    //angularClientSideData = 'Angular';
     AppComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };

@@ -10,12 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/add/observable/throw");
 var DataService = (function () {
     function DataService(http) {
         this.http = http;
     }
     DataService.prototype.getData = function () {
         return this.http.get('/Url/GetHistory');
+    };
+    DataService.prototype.minify = function (url) {
+        var body = JSON.stringify({ url: url });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        return this.http.post('/Url/Minify', body, { headers: headers })
+            .map(function (resp) { return resp.json(); })
+            .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     return DataService;
 }());

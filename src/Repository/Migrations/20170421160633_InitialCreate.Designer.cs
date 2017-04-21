@@ -8,7 +8,7 @@ using UrlMinifier.Repository;
 namespace UrlMinifier.Repository.Migrations
 {
     [DbContext(typeof(UrlContext))]
-    [Migration("20170421103028_InitialCreate")]
+    [Migration("20170421160633_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,26 +17,25 @@ namespace UrlMinifier.Repository.Migrations
                 .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("UrlMinifier.Domain.Url", b =>
+            modelBuilder.Entity("UrlMinifier.Domain.MinifiedUrl", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("ClickCount");
 
-                    b.Property<string>("CreatorIpAddress");
-
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<DateTime>("DateLastUpdated");
+                    b.Property<DateTime?>("DateLastUpdated");
 
-                    b.Property<string>("OriginalUrl");
+                    b.Property<string>("OriginalUrl")
+                        .IsRequired();
 
                     b.Property<string>("ShortUrl");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Urls");
+                    b.ToTable("MinifiedUrls");
                 });
         }
     }

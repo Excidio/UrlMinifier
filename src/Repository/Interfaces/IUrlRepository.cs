@@ -5,12 +5,12 @@ namespace UrlMinifier.Repository.Interfaces
 {
     public interface IUrlRepository
     {
-        int Add(Url url);
+        int Add(MinifiedUrl url);
 
-        void Update(Url url);
+        void Update(MinifiedUrl url);
 
-        Url Get(int id);
+        MinifiedUrl Get(int id);
 
-        IEnumerable<Url> GetAll();
+        IEnumerable<MinifiedUrl> GetAll();
     }
 }

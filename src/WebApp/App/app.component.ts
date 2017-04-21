@@ -8,8 +8,6 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent {
     public constructor(private titleService: Title) { }
 
-    //angularClientSideData = 'Angular';
-
     public setTitle(newTitle: string) {
         this.titleService.setTitle(newTitle);
     }

@@ -44,7 +44,7 @@ namespace UrlMinifier.WebApp
             services.AddMvc();
             services.AddDbContext<UrlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IUrlRepository), typeof(UrlRepository));
-            services.AddScoped(typeof(IUrlService), typeof(UrlService));
+            services.AddScoped(typeof(IMinifiedUrlService), typeof(MinifiedUrlService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +75,10 @@ namespace UrlMinifier.WebApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                //routes.MapRoute(
+                //    name: "default2",
+                //    template: "{shortUrl}",
+                //    defaults: new { controller = "Url", action = "Index" });
 
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
