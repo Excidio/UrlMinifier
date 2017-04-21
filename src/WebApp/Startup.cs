@@ -1,10 +1,16 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using UrlMinifier.Repository;
+using UrlMinifier.Repository.Implementation;
+using UrlMinifier.Repository.Interfaces;
+using UrlMinifier.Services.Implementations;
+using UrlMinifier.Services.Interfaces;
 
 namespace UrlMinifier.WebApp
 {
@@ -17,6 +23,12 @@ namespace UrlMinifier.WebApp
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddApplicationInsightsSettings(true);
+            }
+
             Configuration = builder.Build();
         }
 
@@ -26,7 +38,13 @@ namespace UrlMinifier.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddApplicationInsightsTelemetry(Configuration);
+
+            // Add framework services.
             services.AddMvc();
+            services.AddDbContext<UrlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(IUrlRepository), typeof(UrlRepository));
+            services.AddScoped(typeof(IUrlService), typeof(UrlService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
