@@ -17,7 +17,7 @@ var IndexComponent = (function () {
     IndexComponent.prototype.minify = function (url) {
         var _this = this;
         this.dataService.minify(url)
-            .subscribe(function (data) { console.log(data); _this.shortUrl = ""; });
+            .subscribe(function (data) { _this.shortUrl = data; });
         ;
     };
     return IndexComponent;

@@ -12,6 +12,6 @@ export class IndexComponent {
 
     minify(url: string): void {
         this.dataService.minify(url)
-            .subscribe((data) => { console.log(data); this.shortUrl = ""; });;
+            .subscribe((data) => { this.shortUrl = (data as string); });
     }
 }

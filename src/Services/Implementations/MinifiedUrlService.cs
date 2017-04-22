@@ -31,7 +31,7 @@ namespace UrlMinifier.Services.Implementations
         {
             var minifiedUrlId = BijectiveAlgorithm.Decode(shortUrl);
 
-            return _urlRepository.Get(minifiedUrlId).OriginalUrl;
+            return _urlRepository.Get(minifiedUrlId)?.OriginalUrl;
         }
 
         public IEnumerable<MinifiedUrl> GetAllMinifiedUrl()

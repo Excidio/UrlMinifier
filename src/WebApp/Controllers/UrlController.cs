@@ -14,14 +14,23 @@ namespace UrlMinifier.WebApp.Controllers
             _minifiedUrlService = minifiedUrlService;
         }
 
-        public IActionResult Index(string shortUrl) => Redirect(_minifiedUrlService.GetOriginalUrl(shortUrl));
-
         public IActionResult GetHistory() => Json(_minifiedUrlService.GetAllMinifiedUrl().Select(p => new MinifiedUrlModel(p)));
+
+        public IActionResult Index(string shortUrl)
+        {
+            var originalUrl = _minifiedUrlService.GetOriginalUrl(shortUrl);
+            if (string.IsNullOrWhiteSpace(originalUrl))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return Redirect(originalUrl);
+        }
 
         [HttpPost]
         public IActionResult Minify([FromBody]MinifyModel originalUrl)
         {
-            return Redirect(_minifiedUrlService.MinifyUrl($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}", originalUrl.Url));
+            return Json(_minifiedUrlService.MinifyUrl($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}", originalUrl.Url));
         }
     }
 }

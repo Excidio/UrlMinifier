@@ -12,7 +12,6 @@ namespace UrlMinifier.Services.Algorithms
             if (value == 0) return Alphabet[0].ToString();
 
             var result = string.Empty;
-
             while (value > 0)
             {
                 result += Alphabet[value % Base];
@@ -24,8 +23,9 @@ namespace UrlMinifier.Services.Algorithms
 
         public int Decode(string value)
         {
-            var result = -1;
+            if (string.IsNullOrWhiteSpace(value)) return -1;
 
+            var result = 0;
             foreach (var item in value)
             {
                 result = result * Base + Alphabet.IndexOf(item);
