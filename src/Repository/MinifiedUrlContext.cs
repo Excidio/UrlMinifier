@@ -3,9 +3,9 @@ using UrlMinifier.Domain;
 
 namespace UrlMinifier.Repository
 {
-    public class UrlContext : DbContext
+    public class MinifiedUrlContext : DbContext
     {
-        public UrlContext(DbContextOptions options) : base(options)
+        public MinifiedUrlContext(DbContextOptions options) : base(options)
         {
         }
 

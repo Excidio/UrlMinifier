@@ -42,8 +42,8 @@ namespace UrlMinifier.WebApp
 
             // Add framework services.
             services.AddMvc();
-            services.AddDbContext<UrlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped(typeof(IUrlRepository), typeof(UrlRepository));
+            services.AddDbContext<MinifiedUrlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(IMinifiedUrlRepository), typeof(MinifiedUrlRepository));
             services.AddScoped(typeof(IMinifiedUrlService), typeof(MinifiedUrlService));
         }
 

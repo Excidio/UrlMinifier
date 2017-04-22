@@ -5,11 +5,11 @@ using UrlMinifier.Repository.Interfaces;
 
 namespace UrlMinifier.Repository.Implementation
 {
-    public class UrlRepository : IUrlRepository
+    public class MinifiedUrlRepository : IMinifiedUrlRepository
     {
-        private readonly UrlContext _context;
+        private readonly MinifiedUrlContext _context;
 
-        public UrlRepository(UrlContext bookContext)
+        public MinifiedUrlRepository(MinifiedUrlContext bookContext)
         {
             _context = bookContext;
         }

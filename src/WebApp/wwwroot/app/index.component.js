@@ -18,7 +18,6 @@ var IndexComponent = (function () {
         var _this = this;
         this.dataService.minify(url)
             .subscribe(function (data) { _this.shortUrl = data; });
-        ;
     };
     return IndexComponent;
 }());

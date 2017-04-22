@@ -3,7 +3,7 @@ using UrlMinifier.Domain;
 
 namespace UrlMinifier.Repository.Interfaces
 {
-    public interface IUrlRepository
+    public interface IMinifiedUrlRepository
     {
         int Add(MinifiedUrl url);
 

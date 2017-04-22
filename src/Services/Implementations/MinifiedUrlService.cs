@@ -11,9 +11,9 @@ namespace UrlMinifier.Services.Implementations
     {
         private static readonly BijectiveAlgorithm BijectiveAlgorithm = new BijectiveAlgorithm();
 
-        private readonly IUrlRepository _urlRepository;
+        private readonly IMinifiedUrlRepository _urlRepository;
 
-        public MinifiedUrlService(IUrlRepository urlRepository)
+        public MinifiedUrlService(IMinifiedUrlRepository urlRepository)
         {
             _urlRepository = urlRepository;
         }
