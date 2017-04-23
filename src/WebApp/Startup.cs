@@ -88,7 +88,7 @@ namespace UrlMinifier.WebApp
                     template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "shorturl",
-                    template: "{shortUrl}",
+                    template: "{r}/{shorturl}",
                     defaults: new { controller = "Url", action = "Index" });
 
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });

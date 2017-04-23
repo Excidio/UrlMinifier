@@ -17,19 +17,6 @@ namespace UrlMinifier.WebApp.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult GetHistory()
-        {
-            object result = null;
-
-            var user = _userManager.GetUser();
-            if (user != null)
-            {
-                result = _minifiedUrlService.GetAllMinifiedUrl(user).Select(p => new MinifiedUrlModel(p));
-            }
-            
-            return Json(result);
-        }
-
         public IActionResult Index(string shortUrl)
         {
             var originalUrl = _minifiedUrlService.GetOriginalUrl(shortUrl);
@@ -44,9 +31,22 @@ namespace UrlMinifier.WebApp.Controllers
         [HttpPost]
         public IActionResult Minify([FromBody]MinifyModel originalUrl)
         {
-            var urlPrefix = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            var urlPrefix = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/r";
 
             return Json(_minifiedUrlService.MinifyUrl(urlPrefix, _userManager.GetUser(), originalUrl.Url));
+        }
+
+        public IActionResult GetHistory()
+        {
+            object result = null;
+
+            var user = _userManager.GetUser();
+            if (user != null)
+            {
+                result = _minifiedUrlService.GetAllMinifiedUrl(user).Select(p => new MinifiedUrlModel(p));
+            }
+            
+            return Json(result);
         }
     }
 }
