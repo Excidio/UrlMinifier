@@ -9,15 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var history_service_1 = require("./history.service");
+var url_service_1 = require("./url.service");
 var IndexComponent = (function () {
-    function IndexComponent(dataService) {
-        this.dataService = dataService;
+    function IndexComponent(urlService) {
+        this.urlService = urlService;
     }
     IndexComponent.prototype.minify = function (url) {
         var _this = this;
         this.isProcessing = true;
-        this.dataService
+        this.urlService
             .minify(url)
             .subscribe(function (data) {
             _this.shortUrl = data;
@@ -29,9 +29,9 @@ var IndexComponent = (function () {
 IndexComponent = __decorate([
     core_1.Component({
         templateUrl: '/partial/IndexComponent',
-        providers: [history_service_1.DataService]
+        providers: [url_service_1.UrlService]
     }),
-    __metadata("design:paramtypes", [history_service_1.DataService])
+    __metadata("design:paramtypes", [url_service_1.UrlService])
 ], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map

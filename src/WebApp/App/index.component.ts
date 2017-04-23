@@ -1,20 +1,20 @@
 ﻿import { Component } from '@angular/core';
-import { DataService } from './history.service';
+import { UrlService } from './url.service';
 
 @Component({
     templateUrl: '/partial/IndexComponent',
-    providers: [DataService]
+    providers: [UrlService]
 })
 
 export class IndexComponent {
     shortUrl: string;
     isProcessing: boolean;
 
-    constructor(private dataService: DataService) { }
+    constructor(private urlService: UrlService) { }
 
     minify(url: string): void {
         this.isProcessing = true;
-        this.dataService
+        this.urlService
             .minify(url)
             .subscribe((data) => {
                 this.shortUrl = (data as string);

@@ -6,14 +6,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class DataService {
+export class UrlService {
     constructor(private http: Http) { }
     
-    getData() {
+    getHistory() : Observable<Response> {
         return this.http.get('/Url/GetHistory');
     }
 
-    minify(url: string) {
+    minify(url: string) : Observable<any> {
         const body = JSON.stringify({ url: url });
         const headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 

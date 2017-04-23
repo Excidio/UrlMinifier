@@ -14,25 +14,25 @@ var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
-var DataService = (function () {
-    function DataService(http) {
+var UrlService = (function () {
+    function UrlService(http) {
         this.http = http;
     }
-    DataService.prototype.getData = function () {
+    UrlService.prototype.getHistory = function () {
         return this.http.get('/Url/GetHistory');
     };
-    DataService.prototype.minify = function (url) {
+    UrlService.prototype.minify = function (url) {
         var body = JSON.stringify({ url: url });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json;charset=utf-8' });
         return this.http.post('/Url/Minify', body, { headers: headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
-    return DataService;
+    return UrlService;
 }());
-DataService = __decorate([
+UrlService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], DataService);
-exports.DataService = DataService;
-//# sourceMappingURL=history.service.js.map
+], UrlService);
+exports.UrlService = UrlService;
+//# sourceMappingURL=url.service.js.map

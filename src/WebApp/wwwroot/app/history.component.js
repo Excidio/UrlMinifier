@@ -9,14 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var history_service_1 = require("./history.service");
+var url_service_1 = require("./url.service");
 var HistoryComponent = (function () {
-    function HistoryComponent(dataService) {
-        this.dataService = dataService;
+    function HistoryComponent(urlService) {
+        this.urlService = urlService;
     }
     HistoryComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dataService.getData()
+        this.urlService
+            .getHistory()
             .subscribe(function (data) { return _this.urlRecords = data.json(); });
     };
     HistoryComponent.prototype.openLink = function (event, i) {
@@ -29,9 +30,9 @@ var HistoryComponent = (function () {
 HistoryComponent = __decorate([
     core_1.Component({
         templateUrl: '/partial/HistoryComponent',
-        providers: [history_service_1.DataService]
+        providers: [url_service_1.UrlService]
     }),
-    __metadata("design:paramtypes", [history_service_1.DataService])
+    __metadata("design:paramtypes", [url_service_1.UrlService])
 ], HistoryComponent);
 exports.HistoryComponent = HistoryComponent;
 //# sourceMappingURL=history.component.js.map

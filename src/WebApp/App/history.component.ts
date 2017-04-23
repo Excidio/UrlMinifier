@@ -1,19 +1,20 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { DataService } from './history.service';
+import { UrlService } from './url.service';
 import { UrlRecord } from './url-record';
 
 @Component({
     templateUrl: '/partial/HistoryComponent',
-    providers: [DataService]
+    providers: [UrlService]
 })
 
 export class HistoryComponent {
     urlRecords: UrlRecord[];
-    constructor(private dataService: DataService) { }
+    constructor(private urlService: UrlService) { }
 
     ngOnInit() {
-        this.dataService.getData()
+        this.urlService
+            .getHistory()
             .subscribe((data: Response) => this.urlRecords = data.json());
     }
 
