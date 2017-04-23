@@ -16,4 +16,10 @@ export class HistoryComponent {
         this.dataService.getData()
             .subscribe((data: Response) => this.urlRecords = data.json());
     }
+
+    openLink(event: Event, i: number) {
+        event.preventDefault();
+        this.urlRecords[i].clickCount++;
+        window.open(this.urlRecords[i].shortUrl);
+    }
 }

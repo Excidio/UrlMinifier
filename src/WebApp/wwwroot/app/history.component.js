@@ -19,6 +19,11 @@ var HistoryComponent = (function () {
         this.dataService.getData()
             .subscribe(function (data) { return _this.urlRecords = data.json(); });
     };
+    HistoryComponent.prototype.openLink = function (event, i) {
+        event.preventDefault();
+        this.urlRecords[i].clickCount++;
+        window.open(this.urlRecords[i].shortUrl);
+    };
     return HistoryComponent;
 }());
 HistoryComponent = __decorate([

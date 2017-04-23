@@ -10,12 +10,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let urlRecord of urlRecords">
-                    <td class="col-xs-4"><a href="{{urlRecord.originalUrl}}" target="_blank">{{urlRecord.originalUrl}}</a></td>
-                    <td class="col-xs-3"><a href="{{urlRecord.shortUrl}}" target="_blank">{{urlRecord.shortUrl}}</a></td>
-                    <td class="col-xs-2">{{urlRecord.clickCount}}</td>
-                    <td class="col-xs-3">{{urlRecord.dateCreated}}</td>
-                </tr>
+            <tr *ngFor="let urlRecord of urlRecords; let i = index;">
+                <td class="col-xs-4"><a href="{{urlRecord.originalUrl}}" target="_blank">{{urlRecord.originalUrl}}</a></td>
+                <td class="col-xs-3"><a href="{{urlRecord.shortUrl}}" (click)="openLink($event, i)">{{urlRecord.shortUrl}}</a></td>
+                <td class="col-xs-2">{{urlRecord.clickCount}}</td>
+                <td class="col-xs-3">{{urlRecord.dateCreated}}</td>
+            </tr>
             </tbody>
         </table>
     </div>
