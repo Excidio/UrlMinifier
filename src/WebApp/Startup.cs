@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,9 +43,14 @@ namespace UrlMinifier.WebApp
 
             // Add framework services.
             services.AddMvc();
-            services.AddDbContext<MinifiedUrlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<UrlMinifierContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IMinifiedUrlRepository), typeof(MinifiedUrlRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
             services.AddScoped(typeof(IMinifiedUrlService), typeof(MinifiedUrlService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

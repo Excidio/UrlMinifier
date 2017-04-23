@@ -30,5 +30,8 @@
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
 
 </Project>

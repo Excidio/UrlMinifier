@@ -7,11 +7,11 @@ namespace UrlMinifier.Repository.Implementation
 {
     public class MinifiedUrlRepository : IMinifiedUrlRepository
     {
-        private readonly MinifiedUrlContext _context;
+        private readonly UrlMinifierContext _context;
 
-        public MinifiedUrlRepository(MinifiedUrlContext bookContext)
+        public MinifiedUrlRepository(UrlMinifierContext context)
         {
-            _context = bookContext;
+            _context = context;
         }
 
         public int Add(MinifiedUrl url)

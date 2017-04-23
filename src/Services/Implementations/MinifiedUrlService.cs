@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UrlMinifier.Domain;
 using UrlMinifier.Repository.Interfaces;
 using UrlMinifier.Services.Algorithms;
@@ -20,32 +21,41 @@ namespace UrlMinifier.Services.Implementations
 
         #region IUrlService
 
-        public string MinifyUrl(string urlPrefix, string originalUrl)
+        public string MinifyUrl(string urlPrefix, User user, string originalUrl)
         {
-            var minifiedUrl = CreateInitialMinifiedUrl(originalUrl);
+            var minifiedUrl = CreateInitialMinifiedUrl(user, originalUrl);
 
             return CreateShortUrl(urlPrefix, minifiedUrl).ShortUrl;
         }
 
         public string GetOriginalUrl(string shortUrl)
         {
+            var result = string.Empty;
             var minifiedUrlId = BijectiveAlgorithm.Decode(shortUrl);
+            var minifiedUrl = _urlRepository.Get(minifiedUrlId);
+            if (minifiedUrl != null)
+            {
+                minifiedUrl.ClickCount++;
+                _urlRepository.Update(minifiedUrl);
+                result = minifiedUrl.OriginalUrl;
+            }
 
-            return _urlRepository.Get(minifiedUrlId)?.OriginalUrl;
+            return result;
         }
 
-        public IEnumerable<MinifiedUrl> GetAllMinifiedUrl()
+        public IEnumerable<MinifiedUrl> GetAllMinifiedUrl(User user)
         {
-            return _urlRepository.GetAll();
+            return _urlRepository.GetAll().Where(u => u.UserId == user.Id); // TODO: refactor that
         }
 
         #endregion
 
 
-        private MinifiedUrl CreateInitialMinifiedUrl(string originalUrl)
+        private MinifiedUrl CreateInitialMinifiedUrl(Identity user, string originalUrl)
         {
             var url = new MinifiedUrl
             {
+                UserId = user.Id,
                 OriginalUrl = originalUrl,
                 DateCreated = DateTime.Now
             };

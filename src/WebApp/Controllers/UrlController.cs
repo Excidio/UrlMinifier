@@ -3,18 +3,35 @@ using Microsoft.AspNetCore.Mvc;
 using UrlMinifier.Services.Interfaces;
 using UrlMinifier.WebApp.Models;
 
+
 namespace UrlMinifier.WebApp.Controllers
 {
     public class UrlController : Controller
     {
         private readonly IMinifiedUrlService _minifiedUrlService;
+        private readonly IUserService _userService;
 
-        public UrlController(IMinifiedUrlService minifiedUrlService)
+        public UrlController(IMinifiedUrlService minifiedUrlService, IUserService userService)
         {
             _minifiedUrlService = minifiedUrlService;
+            _userService = userService;
         }
 
-        public IActionResult GetHistory() => Json(_minifiedUrlService.GetAllMinifiedUrl().Select(p => new MinifiedUrlModel(p)));
+        public IActionResult GetHistory()
+        {
+            object result = null;
+
+            var ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+            var user = _userService.GetUser(ipAddress);
+
+            if (user != null)
+            {
+                result = _minifiedUrlService.GetAllMinifiedUrl(user).Select(p => new MinifiedUrlModel(p));
+            }
+            
+
+            return Json(result);
+        }
 
         public IActionResult Index(string shortUrl)
         {
@@ -30,7 +47,13 @@ namespace UrlMinifier.WebApp.Controllers
         [HttpPost]
         public IActionResult Minify([FromBody]MinifyModel originalUrl)
         {
-            return Json(_minifiedUrlService.MinifyUrl($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}", originalUrl.Url));
+            var urlPrefix = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+
+            var ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+            var user = _userService.GetUser(ipAddress) ?? _userService.CreateUser(ipAddress);
+            
+
+            return Json(_minifiedUrlService.MinifyUrl(urlPrefix, user, originalUrl.Url));
         }
     }
 }
