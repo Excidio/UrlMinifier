@@ -8,7 +8,7 @@ using UrlMinifier.Repository;
 namespace UrlMinifier.Repository.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20170422140117_InitialCreate")]
+    [Migration("20170423162846_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

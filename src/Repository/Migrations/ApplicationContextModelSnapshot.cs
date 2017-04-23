@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using UrlMinifier.Repository;
 
 namespace UrlMinifier.Repository.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class UrlMinifierContextModelSnapshot : ModelSnapshot
+    partial class ApplicationContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

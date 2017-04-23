@@ -76,6 +76,7 @@ namespace UrlMinifier.Services.Implementations
         private void IncreaseClickCount(MinifiedUrl minifiedUrl)
         {
             minifiedUrl.ClickCount++;
+            minifiedUrl.DateLastUpdated = DateTime.Now;
             _urlRepository.Update(minifiedUrl);
         }
     }
