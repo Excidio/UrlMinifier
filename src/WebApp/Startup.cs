@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ using UrlMinifier.Repository.Implementation;
 using UrlMinifier.Repository.Interfaces;
 using UrlMinifier.Services.Implementations;
 using UrlMinifier.Services.Interfaces;
+using UrlMinifier.WebApp.Managers;
 
 namespace UrlMinifier.WebApp
 {
@@ -38,19 +40,20 @@ namespace UrlMinifier.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
+                options.CookieHttpOnly = true;
+            });
+
             services.AddApplicationInsightsTelemetry(Configuration);
-
-            // Add framework services.
             services.AddMvc();
-            services.AddDbContext<UrlMinifierContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped(typeof(IMinifiedUrlRepository), typeof(MinifiedUrlRepository));
-            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
-            services.AddScoped(typeof(IMinifiedUrlService), typeof(MinifiedUrlService));
-            services.AddScoped(typeof(IUserService), typeof(UserService));
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            DiSettings(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +79,8 @@ namespace UrlMinifier.WebApp
                 RequestPath = "/node_modules"
             });
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -88,6 +93,20 @@ namespace UrlMinifier.WebApp
 
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
+        }
+
+        private void DiSettings(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(IMinifiedUrlRepository), typeof(MinifiedUrlRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
+            services.AddScoped(typeof(IMinifiedUrlService), typeof(MinifiedUrlService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
+
+            services.AddScoped(typeof(IUserManager), typeof(UserManager));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }
