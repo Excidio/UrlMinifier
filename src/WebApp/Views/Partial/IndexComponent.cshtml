@@ -1,11 +1,13 @@
-﻿<div class="row content vertical-align">
-    <div class="col-lg-6 col-lg-offset-3">
+﻿<div class="row vertical-center">
+    <div class="col-lg-6">
         <div class="input-group">
             <input type="text" [(ngModel)]="url" class="form-control" placeholder="http://www.example.com" />
             <span class="input-group-btn">
-                <button class="btn btn-primary" (click)="minify(url)" type="button">Minify</button>
+                <button class="btn btn-primary" type="button" [ngClass]="{disabled : isProcessing}" (click)="!isProcessing && minify(url)">Minify</button>
             </span>
-            <p>Result: {{shortUrl}}</p>
+        </div>
+        <div class="input-group text-center width100" *ngIf="shortUrl">
+            <p>Result: <a href="{{shortUrl}}" target="_blank">{{shortUrl}}</a></p>
         </div>
     </div>
 </div>

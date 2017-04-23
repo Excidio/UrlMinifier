@@ -16,8 +16,13 @@ var IndexComponent = (function () {
     }
     IndexComponent.prototype.minify = function (url) {
         var _this = this;
-        this.dataService.minify(url)
-            .subscribe(function (data) { _this.shortUrl = data; });
+        this.isProcessing = true;
+        this.dataService
+            .minify(url)
+            .subscribe(function (data) {
+            _this.shortUrl = data;
+            _this.isProcessing = false;
+        });
     };
     return IndexComponent;
 }());
