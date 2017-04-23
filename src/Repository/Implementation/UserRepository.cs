@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using UrlMinifier.Domain;
 using UrlMinifier.Repository.Interfaces;
 
@@ -6,9 +8,9 @@ namespace UrlMinifier.Repository.Implementation
 {
     public class UserRepository : IUserRepository
     {
-        private readonly UrlMinifierContext _context;
+        private readonly ApplicationContext _context;
 
-        public UserRepository(UrlMinifierContext context)
+        public UserRepository(ApplicationContext context)
         {
             _context = context;
         }
@@ -21,9 +23,9 @@ namespace UrlMinifier.Repository.Implementation
             return user.Id;
         }
 
-        public User Get(string ipAddress)
+        public User Get(Expression<Func<User, bool>> expression)
         {
-            return _context.Users.SingleOrDefault(s => s.IpAddress == ipAddress);
+            return _context.Users.SingleOrDefault(expression);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using UrlMinifier.Domain;
+﻿using System;
+using System.Linq.Expressions;
+using UrlMinifier.Domain;
 
 namespace UrlMinifier.Repository.Interfaces
 {
@@ -6,6 +8,6 @@ namespace UrlMinifier.Repository.Interfaces
     {
         int Add(User user);
 
-        User Get(string ipAddress);
+        User Get(Expression<Func<User, bool>> expression);
     }
 }

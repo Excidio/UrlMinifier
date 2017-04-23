@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using UrlMinifier.Domain;
 
 namespace UrlMinifier.Repository.Interfaces
@@ -9,8 +11,8 @@ namespace UrlMinifier.Repository.Interfaces
 
         void Update(MinifiedUrl url);
 
-        MinifiedUrl Get(int id);
+        MinifiedUrl Get(Expression<Func<MinifiedUrl, bool>> expression);
 
-        IEnumerable<MinifiedUrl> GetAll();
+        IEnumerable<MinifiedUrl> GetAll(Expression<Func<MinifiedUrl, bool>> expression);
     }
 }

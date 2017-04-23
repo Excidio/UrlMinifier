@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using UrlMinifier.Domain;
 using UrlMinifier.Repository.Interfaces;
 
@@ -7,9 +9,9 @@ namespace UrlMinifier.Repository.Implementation
 {
     public class MinifiedUrlRepository : IMinifiedUrlRepository
     {
-        private readonly UrlMinifierContext _context;
+        private readonly ApplicationContext _context;
 
-        public MinifiedUrlRepository(UrlMinifierContext context)
+        public MinifiedUrlRepository(ApplicationContext context)
         {
             _context = context;
         }
@@ -28,14 +30,14 @@ namespace UrlMinifier.Repository.Implementation
             _context.SaveChanges();
         }
 
-        public MinifiedUrl Get(int id)
+        public MinifiedUrl Get(Expression<Func<MinifiedUrl, bool>> expression)
         {
-            return _context.MinifiedUrls.SingleOrDefault(s => s.Id == id);
+            return _context.MinifiedUrls.SingleOrDefault(expression);
         }
 
-        public IEnumerable<MinifiedUrl> GetAll()
+        public IEnumerable<MinifiedUrl> GetAll(Expression<Func<MinifiedUrl, bool>> expression)
         {
-            return _context.MinifiedUrls.ToList();
+            return _context.MinifiedUrls.Where(expression).ToList();
         }
     }
 }

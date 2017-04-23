@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace UrlMinifier.Repository.Migrations
 {
-    [DbContext(typeof(UrlMinifierContext))]
+    [DbContext(typeof(ApplicationContext))]
     partial class UrlMinifierContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -27,7 +27,7 @@ namespace UrlMinifier.Services.Implementations
 
         public User GetUser(string ipAddress)
         {
-            return _userRepository.Get(ipAddress);
+            return _userRepository.Get(p => p.IpAddress == ipAddress);
         }
     }
 }

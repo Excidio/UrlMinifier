@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UrlMinifier.Domain;
 using UrlMinifier.Repository.Interfaces;
 using UrlMinifier.Services.Algorithms;
@@ -31,12 +30,12 @@ namespace UrlMinifier.Services.Implementations
         public string GetOriginalUrl(string shortUrl)
         {
             var result = string.Empty;
+
             var minifiedUrlId = BijectiveAlgorithm.Decode(shortUrl);
-            var minifiedUrl = _urlRepository.Get(minifiedUrlId);
+            var minifiedUrl = _urlRepository.Get(p => p.Id == minifiedUrlId);
             if (minifiedUrl != null)
             {
-                minifiedUrl.ClickCount++;
-                _urlRepository.Update(minifiedUrl);
+                IncreaseClickCount(minifiedUrl);
                 result = minifiedUrl.OriginalUrl;
             }
 
@@ -45,7 +44,7 @@ namespace UrlMinifier.Services.Implementations
 
         public IEnumerable<MinifiedUrl> GetAllMinifiedUrl(User user)
         {
-            return _urlRepository.GetAll().Where(u => u.UserId == user.Id); // TODO: refactor that
+            return _urlRepository.GetAll(u => u.UserId == user.Id);
         }
 
         #endregion
@@ -72,6 +71,12 @@ namespace UrlMinifier.Services.Implementations
             _urlRepository.Update(minifiedUrl);
 
             return minifiedUrl;
+        }
+
+        private void IncreaseClickCount(MinifiedUrl minifiedUrl)
+        {
+            minifiedUrl.ClickCount++;
+            _urlRepository.Update(minifiedUrl);
         }
     }
 }
