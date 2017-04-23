@@ -8,10 +8,17 @@ import { DataService } from './history.service';
 
 export class IndexComponent {
     shortUrl: string;
+    isProcessing: boolean;
+
     constructor(private dataService: DataService) { }
 
     minify(url: string): void {
-        this.dataService.minify(url)
-            .subscribe((data) => { this.shortUrl = (data as string); });
+        this.isProcessing = true;
+        this.dataService
+            .minify(url)
+            .subscribe((data) => {
+                this.shortUrl = (data as string);
+                this.isProcessing = false;
+            });
     }
 }
