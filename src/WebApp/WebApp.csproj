@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\CustomProfile1.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\app\systemjs.config.js" />
+    <Content Include="wwwroot\js\systemjs.config.js" />
     <Content Include="wwwroot\systemjs.config.js" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +35,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\" />
   </ItemGroup>
 
 </Project>
