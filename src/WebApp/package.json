@@ -1,5 +1,5 @@
 {
-  "name": "webapp1",
+  "name": "webapp",
   "version": "1.0.0",
   "dependencies": {
     "@angular/common": "~4.0.0",
@@ -36,12 +36,9 @@
   },
   "scripts": {
     "start": "concurrently \"npm run gulp\" \"npm run watch\" \"npm run tsc:w\"",
-    "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "typings": "typings",
     "gulp": "gulp",
-    "watch": "gulp watch",
     "ngc": "ngc"
   }
 }
