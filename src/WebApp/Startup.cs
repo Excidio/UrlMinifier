@@ -86,6 +86,8 @@ namespace UrlMinifier.WebApp
 
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
+
+            SeedData(app);
         }
 
         private void DiSettings(IServiceCollection services)
@@ -100,6 +102,14 @@ namespace UrlMinifier.WebApp
             services.AddScoped(typeof(IUserManager), typeof(UserManager));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        }
+
+        public void SeedData(IApplicationBuilder app)
+        {
+            var context = app.ApplicationServices.GetService<ApplicationContext>();
+
+            if (!context.Database.EnsureCreated())
+                context.Database.Migrate();
         }
     }
 }
