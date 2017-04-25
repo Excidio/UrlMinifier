@@ -19,7 +19,7 @@
         corejs: base.node_modules + "core-js/client/shim*.js",
         zonejs: base.node_modules + "zone.js/dist/zone*.js",
         systemjs: base.node_modules + "systemjs/dist/*.js",
-        rxjs: base.node_modules + "rxjs/**/*.js",
+        rxjs: base.node_modules + "rxjs/**/*.js"
     };
 
     return config;
